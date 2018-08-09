@@ -1,0 +1,6 @@
+Work Diary
+
+week2
+Group formed. After discussion in the lab, we had an agreement about which topic we will do. According to the given three topic, we decided to attempt the topic 1 - X-o-Bot. After the lab, I tried to search some information about chat robot on the internet. Finally, I found a python library called "ChatterBot" which will be very useful for our project and I recommended it to my teammate.
+
+
