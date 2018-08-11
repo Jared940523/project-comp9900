@@ -1,0 +1,15 @@
+Week 2:
+  Created the GitHub repository and Trello board for the group. We
+  discussed what project we would do, and ended up with topic 1:
+  X-o-Bot. Using my experience in web design, I created a basic
+  prototype of a front end webpage in which a user can type in their
+  query and it sends off a request to a server.
+
+Week 3:
+  We defined the project more precisely, coming to the agreement that
+  we'll make a bot that functions similarly to the student center at
+  UNSW. The user will type in their question, something like "What
+  courses should I do this semester?", and the app will respond with
+  an appropriate response. We also delegated tasks for both the proposal
+  writing and the project itself. I appointed myself to do the front
+  end for both the website and the mobile app.
