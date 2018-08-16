@@ -10,5 +10,4 @@ Week 3 (Project proposal part)
 4. Working on the background/domain, aim, existing system and drawback, team skiils, timeline part for the Proeject proposal. 
 
 Week 4
-1. Learing "Scrapy" for our database part.
-2. 
+1. Learing "Scrapy" for our database part
