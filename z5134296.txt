@@ -8,3 +8,7 @@ Week 3 (Project proposal part)
 2. Write the scratch project proposal.
 3. Discuss with teams during the Friday's lab and split the proposal works.
 4. Working on the background/domain, aim, existing system and drawback, team skiils, timeline part for the Proeject proposal. 
+
+Week 4
+1. Learing "Scrapy" for our database part.
+2. 
