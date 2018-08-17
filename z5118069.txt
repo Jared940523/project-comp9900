@@ -13,3 +13,10 @@ Week 3:
   an appropriate response. We also delegated tasks for both the proposal
   writing and the project itself. I appointed myself to do the front
   end for both the website and the mobile app.
+
+Week 4:
+  Created a prototype for the front end webpage. This wasn't too difficult,
+  but it's a very necessary part as the main purpose of this app is for
+  users to have a very convenient way to ask questions to the bot. I also
+  created a small basic flask server for the purpose of testing sending
+  and receiving responses to and from a server.
