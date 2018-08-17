@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import { map } from 'lodash';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
@@ -9,8 +10,17 @@ class App extends Component {
 
     this.state = {
       input: '',
-      messages: ['Centerbot: Hello! How can I assist you?'],
+      messages: [['Centerbot', 'Hello! How can I assist you?']],
     }
+  }
+
+  addMessage(fromUser, message) {
+    const { messages } = this.state;
+    const source = fromUser ? 'You' : 'Centerbot';
+    messages.push([source, message]);
+    this.setState({
+      messages,
+    }, this.updateScroll);
   }
 
   updateScroll() {
@@ -23,12 +33,17 @@ class App extends Component {
   }
 
   submit() {
-    const { messages } = this.state;
-    messages.push(`You: ${this.state.input}`);
-    this.setState({
-      input: '',
-      messages,
-    }, this.updateScroll);
+    this.addMessage(true, this.state.input);
+
+    // axios.get('http://localhost:5000').then((response) => {
+    //   console.log(response);
+    // })
+
+    axios.post('http://localhost:5000', {
+      message: this.state.input
+    }).then((response) => this.addMessage(false, response.data));
+
+    this.setState({ input: '' });
   }
 
   onKeyPress(e) {
@@ -45,8 +60,8 @@ class App extends Component {
         </header>
         <div className="message-container" id="messages">
           {
-            map(this.state.messages, (message) => {
-              return <p>{message}</p>;
+            map(this.state.messages, (message, key) => {
+              return <p key={key}><strong>{message[0]}</strong>: {message[1]}</p>;
             })
           }
         </div>
