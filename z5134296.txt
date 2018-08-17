@@ -11,3 +11,6 @@ Week 3 (Project proposal part)
 
 Week 4
 1. Learing "Scrapy" for our database part
+2. Prepare course information for crawl
+3. Dicuss the chatbot part with Jared about he Q&A part.
+4. Discuss the web part with Spencser about his Progress.
