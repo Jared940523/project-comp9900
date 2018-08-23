@@ -14,3 +14,9 @@ Week 4
 2. Prepare course information for crawl
 3. Dicuss the chatbot part with Jared about he Q&A part.
 4. Discuss the web part with Spencser about his Progress.
+
+Week 5
+1. Manage Trello.
+2. Learning "Scapy" frame.
+3. I was working on the information crawl, trying to crawl information bout sybject requirement
+   such as reduce study loean, overloading and other special requiests.
