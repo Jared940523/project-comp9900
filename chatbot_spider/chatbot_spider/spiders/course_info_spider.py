@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from chatbot_spider.items import *
+import os
+import csv
 
 
 class CourseInfoSpiderSpider(scrapy.Spider):
@@ -10,16 +12,79 @@ class CourseInfoSpiderSpider(scrapy.Spider):
 
     def parse(self, response):
         course_info = response.xpath("//*[@id='contentPane']/div[2]/div/table/tr")
+
         for item in course_info:
             course_info_detail = ChatbotSpiderItem()
             course_info_detail['course_code'] = item.xpath("./td[1]/text()").extract_first()
             course_url_title = item.xpath("./td[2]/a[contains(@href, text)]")
-
+            course_info_detail['course_credit'] = item.xpath("./td[3]/text()").extract_first()
+            # course_url = ""
             for item_1 in course_url_title:
                 course_info_detail['course_url'] = item_1.xpath("@href").extract_first()
+                # course_url = item_1.xpath("@href").extract_first()
                 course_info_detail['course_title'] = item_1.xpath("text()").extract_first()
 
-            course_info_detail['course_credit'] = item.xpath("./td[3]/text()").extract_first()
-
             if None not in course_info_detail.values():
-                yield course_info_detail
+                yield scrapy.Request(url=course_info_detail['course_url'],
+                                     callback=self.detail_parse,
+                                     meta={'item': course_info_detail})
+                # print(course_info_detail)
+                # yield course_info_detail
+
+    def detail_parse(self, response):
+        # base_url = "http://www.handbook.unsw.edu.au"
+        course_detail = response.xpath("//*[@id='contentPane']/div[2]/div/div[2]/p")
+        item = response.meta['item']
+
+        for i in course_detail:
+            name = i.xpath("./strong/text()").extract_first()
+            if name == "Faculty:":
+                item['course_faculty'], item['course_faculty_url'] \
+                    = self.extract_info(i.xpath("./a[contains(@href, text)]"))
+            elif name == "School:":
+                item['course_school'], item['course_school_url'] \
+                    = self.extract_info(i.xpath("./a[contains(@href, text)]"))
+            elif name == "Course Outline:":
+                item['course_outline'], item['course_outline_url'] \
+                    = self.extract_info(i.xpath("./a[contains(@href, text)]"))
+            elif name == "Campus:":
+                item['course_campus'] = i.xpath("./text()").extract_first().split()[0]
+            elif name == "Career:":
+                item['course_career'] = i.xpath("./text()").extract_first().split()[0]
+            elif name == "EFTSL:":
+                item['course_EFTSL'], item['course_EFTSL_url'] \
+                    = self.extract_info(i.xpath("./a[contains(@href, text)]"))
+            elif name == "Indicative Contact Hours per Week:":
+                item['course_hours'] = i.xpath("./text()").extract_first().split()[0]
+            elif name == "Tuition Fee:":
+                item['course_fee'], item['course_fee_url'] \
+                    = self.extract_info(i.xpath("./a[contains(@href, text)]"))
+            elif name == "Further Information:":
+                item['course_further_info'], item['course_further_info_url'] \
+                    = self.extract_info(i.xpath("./a[contains(@href, text)]"))
+
+        item['course_description'] = response.xpath("//*[@id='contentPane']/div[2]/div/div[4]/text()").extract()
+        yield item
+
+
+        # faculty, faculty_url = self.extract_info(course_detail.xpath("./p[1]/a[contains(@href, text)]"))
+        # school, school_url = self.extract_info(course_detail.xpath("./p[2]/a[contains(@href, text)]"))
+        # outline, outline_url = self.extract_info(course_detail.xpath("./p[3]/a[contains(@href, text)]"))
+        # campus = course_detail.xpath("./p[4]/text()").extract_first()
+        # career = course_detail.xpath("./p[5]/text()").extract_first()
+        # EFTSL, EFTSL_url = self.extract_info(course_detail.xpath("./p[7]/a[contains(@href, text)]"))
+        # hours = course_detail.xpath("./p[8]/text()").extract_first()
+        # fee, fee_url = self.extract_info(course_detail.xpath("./p[11]/a[contains(@href, text)]"))
+        # further_info, further_info_url = self.extract_info(course_detail.xpath("./p[12]/a[contains(@href, text)]"))
+        # description = response.xpath("//*[@id='contentPane']/div[2]/div/div[4]/text()").extract()
+
+    def extract_info(self, path):
+        url = path.xpath("@href").extract_first()
+        info = path.xpath("text()").extract_first()
+
+        if url is None:
+            url = "url invalid"
+        if info is None:
+            info = "info invalid"
+
+        return info, url
