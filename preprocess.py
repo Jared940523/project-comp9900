@@ -2,6 +2,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer 
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
+import re
 ##import enchant
 
 def preprocess(input_line):
@@ -19,9 +20,10 @@ def getzid(l):
             return t
         
 def getcourse(l):
-    for t in l:
-        if 'comp' in t or len([i for i in t if i.isdigit()]) == 4:
-            return t
+    for i in l:
+        m = re.match('^[a-z]{4}[0-9]{4}$',i)
+        if m:
+            return i
         
 def WordCheck(self,words):#spelling check
     d = enchant.Dict("en_US")
