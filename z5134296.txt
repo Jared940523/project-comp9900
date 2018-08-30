@@ -20,3 +20,12 @@ Week 5
 2. Learning "Scapy" frame.
 3. I was working on the information crawl, trying to crawl information bout sybject requirement
    such as reduce study loean, overloading and other special requiests.
+
+Week 6
+1. Manage Trello.
+2. Working on the database part this week, using "Scrapy" to crawl information alout the studdent support part,
+   especially the international student support part. 
+3. Communicate with Zefeng about our database part, because the handnook website was totally changed and the 
+   old handbook page was removed after we crawl all the course information from the old handbook. 
+   So we have to rewrite the course information part later.
+4. Communicate with group memembers to papare our demo.
