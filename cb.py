@@ -20,7 +20,7 @@ chatterbot = ChatBot(
         },
          {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-            'threshold': 0.65,
+            'threshold': 0.45,
             'default_response': 'I am sorry, but that does not look like anything to me.'
         }
     ],
@@ -31,7 +31,7 @@ chatterbot = ChatBot(
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
 chatterbot.train(
-    "chatterbot.corpus.english"
+    "./ai.yml"
 )
 
 print("How can I help you?")
