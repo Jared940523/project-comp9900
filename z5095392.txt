@@ -11,3 +11,6 @@ In this week, I try to crawl some course information in postgraduate coursework 
 
 week5
 In week 4, I have crawled all the course information about code, title and credit. So in this week, I continue do the web research on the UNSW handbook 2018 postgraduate website for detail information about every course including faculty, school, campus and so on. For most courses, the detailed information has been crawled. There are still some errors in the code. Some are caused by website information loss and the other are caused by information saving. I will solve these problem in the next week. Furthermore, I will also crawl the course information about undergraduate.
+
+week6
+The websites of UNSW handbook have been totally changed and the structure has been changed as well. So the code we developed before needed to be rewrite. However, the data we has crawled could still be used. In this week, I tried to write new code to parse the new websites.
