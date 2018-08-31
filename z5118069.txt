@@ -20,3 +20,17 @@ Week 4:
   users to have a very convenient way to ask questions to the bot. I also
   created a small basic flask server for the purpose of testing sending
   and receiving responses to and from a server.
+
+Week 5:
+  Researched into the chatbot more. In order to train the chatbot, we would have
+  to create a lot of training data, with many inputs and their corresponding
+  outputs to make the bot learn how to correctly respond. This does not seem
+  feasible in the amount of time that we have for the project, so our next
+  idea was to use a "preprocessing" function, which can extract the key words
+  out of the question, such as course and zid, and then pass that to the chatbot
+
+Week 6:
+  Worked on the preprocess function, still having trouble linking it up to the
+  chatbot. The chatbot accepts a string input, but the preprocess function returns
+  a tuple, so we need to figure out a consistent way of extracting the relevant
+  words but leaving the question intact.
