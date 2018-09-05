@@ -14,3 +14,6 @@ In week 4, I have crawled all the course information about code, title and credi
 
 week6
 The websites of UNSW handbook have been totally changed and the structure has been changed as well. So the code we developed before needed to be rewrite. However, the data we has crawled could still be used. In this week, I tried to write new code to parse the new websites.
+
+week7
+In this week, I am still working with the database module. In the weeks before, I crawled the information from UNSW handbook websites and saved the data in CSV files which are convenient for my teammates to use the data. However, if we want to crawl huge information from the websites, the CSV file could not satisfy the demand. So the database system should be implemented. This week, I have built the database development environment and successfully saved the information to the database system.
