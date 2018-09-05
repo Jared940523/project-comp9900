@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from chatbot_spider.items import *
-import os
-import csv
 
 
 class CourseInfoSpiderSpider(scrapy.Spider):
     name = 'course_info_spider'
     allowed_domains = ['handbook.unsw.edu.au']
-    start_urls = ['http://www.handbook.unsw.edu.au/vbook2018/brCoursesByAtoZ.jsp?StudyLevel=Postgraduate&descr=All']
+    start_urls = ['http://legacy.handbook.unsw.edu.au/vbook2018/brCoursesByAtoZ.jsp?StudyLevel=Postgraduate&descr=All']
 
     def parse(self, response):
         course_info = response.xpath("//*[@id='contentPane']/div[2]/div/table/tr")
@@ -65,18 +63,6 @@ class CourseInfoSpiderSpider(scrapy.Spider):
 
         item['course_description'] = response.xpath("//*[@id='contentPane']/div[2]/div/div[4]/text()").extract()
         yield item
-
-
-        # faculty, faculty_url = self.extract_info(course_detail.xpath("./p[1]/a[contains(@href, text)]"))
-        # school, school_url = self.extract_info(course_detail.xpath("./p[2]/a[contains(@href, text)]"))
-        # outline, outline_url = self.extract_info(course_detail.xpath("./p[3]/a[contains(@href, text)]"))
-        # campus = course_detail.xpath("./p[4]/text()").extract_first()
-        # career = course_detail.xpath("./p[5]/text()").extract_first()
-        # EFTSL, EFTSL_url = self.extract_info(course_detail.xpath("./p[7]/a[contains(@href, text)]"))
-        # hours = course_detail.xpath("./p[8]/text()").extract_first()
-        # fee, fee_url = self.extract_info(course_detail.xpath("./p[11]/a[contains(@href, text)]"))
-        # further_info, further_info_url = self.extract_info(course_detail.xpath("./p[12]/a[contains(@href, text)]"))
-        # description = response.xpath("//*[@id='contentPane']/div[2]/div/div[4]/text()").extract()
 
     def extract_info(self, path):
         url = path.xpath("@href").extract_first()
