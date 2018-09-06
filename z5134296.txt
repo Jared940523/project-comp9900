@@ -29,3 +29,10 @@ Week 6
    old handbook page was removed after we crawl all the course information from the old handbook. 
    So we have to rewrite the course information part later.
 4. Communicate with group memembers to papare our demo.
+
+
+Week 7
+1. Manage Trello.
+2. Fnished the student support information data crawling and saved it into csv file.
+3. Communicate with Zefeng that decide to save our csv files into mySQL databse.
+4. Learning mySQL database and start to import csv files that I crawled to mySQL database.
