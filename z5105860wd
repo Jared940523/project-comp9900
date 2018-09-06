@@ -17,3 +17,37 @@ week5：
 1. input preprocessing code.
 2. mind map(unfinished)
 3. corpus attempt(unfinished)
+
+week6:
+1.prepare for the demo this week.
+2.corpus attempt(unfinished)
+3.build the connect between the data and the bot.
+
+week7:
+I'v looked through all the source code of chatterbot lib in order to better understand the way it works and try to answer the question left last week.
+
+what kind of machine learning does chatterbot use:
+
+1. Search algorithms
+Searching is the most rudimentary form of artificial intelligence. To be fair, there are differences between machine learning and artificial intelligence but lets avoid those for now and instead focus on the topic of algorithms that make the chat bot talk intelligently.
+
+Search is a crucial part of how a chat bot quickly and efficiently retrieves the possible candidate statements that it can respond with.
+
+Some examples of attributes that help the chat bot select a response include
+
+(1). the similarity of an input statement to known statements
+*chatterbot use Levenshtein distance by default.
+(2). the frequency in which similar known responses occur
+(3). the likeliness of an input statement to fit into a category that known statements are a part of
+*after doing matching algorithm with all statement stored , the input will be fit into the closest one .(sort of 1nn algorithm)
+
+2. Classification algorithms
+Several logic adapters in ChatterBot use naive Bayesian classification algorithms to determine if an input statement meets a particular set of criteria that warrant a response to be generated from that logic adapter.
+*for example , in this logic adapter TimeLogicAdapter(LogicAdapter) . the code pre-set several 'positive' question and several 'negative' question and then make them 1,0 word by word respectively. and when a input statement come , the classifer will make a decision if the statement is 1 or 0 so that the system can decide the output.
+
+
+task doing and to do. 
+from above you can see the mose important part of the correctness of the chatbot is what it have learned, which is the corpus we give to it. So I will focus on the corpus part .
+
+and now that we got all the information from the new unswhand book. I think it is the time to process the data we have and form a database.
+I remember you said we need to show you the ER gram and that will be done next week.
