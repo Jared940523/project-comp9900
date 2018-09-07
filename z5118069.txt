@@ -15,22 +15,35 @@ Week 3:
   end for both the website and the mobile app.
 
 Week 4:
-  Created a prototype for the front end webpage. This wasn't too difficult,
-  but it's a very necessary part as the main purpose of this app is for
-  users to have a very convenient way to ask questions to the bot. I also
-  created a small basic flask server for the purpose of testing sending
-  and receiving responses to and from a server.
+  Created a prototype for the front end webpage. This wasn't too
+  difficult, but it's a very necessary part as the main purpose of this
+  app is for users to have a very convenient way to ask questions to the
+  bot. I also created a small basic flask server for the purpose of
+  testing sending and receiving responses to and from a server.
 
 Week 5:
-  Researched into the chatbot more. In order to train the chatbot, we would have
-  to create a lot of training data, with many inputs and their corresponding
-  outputs to make the bot learn how to correctly respond. This does not seem
-  feasible in the amount of time that we have for the project, so our next
-  idea was to use a "preprocessing" function, which can extract the key words
-  out of the question, such as course and zid, and then pass that to the chatbot
+  Researched into the chatbot more. In order to train the chatbot, we
+  would have to create a lot of training data, with many inputs and
+  their corresponding outputs to make the bot learn how to correctly
+  respond. This does not seem feasible in the amount of time that we
+  have for the project, so our next idea was to use a "preprocessing"\
+  function, which can extract the key words out of the question, such
+  as course and zid, and then pass that to the chatbot.
 
 Week 6:
-  Worked on the preprocess function, still having trouble linking it up to the
-  chatbot. The chatbot accepts a string input, but the preprocess function returns
-  a tuple, so we need to figure out a consistent way of extracting the relevant
-  words but leaving the question intact.
+  Worked on the preprocess function, still having trouble linking it up
+  to the chatbot. The chatbot accepts a string input, but the preprocess
+  function returns a tuple, so we need to figure out a consistent way
+  of extracting the relevant words but leaving the question intact.
+
+Week 7:
+  Did more research into the inner workings of the chatbot. The machine
+  learning method used by the chatterbot is naive Bayesian
+  classification, which is a fairly simplistic but fast method, and is
+  a popular method for text classification. For making the chatbot more
+  intelligent, I will have to write more test data, but I would also
+  have to create a filter, which will be used to more accurately grab
+  key words like course codes and be able to process them
+  appropriately. As we will mostly likely be heavily using filters for
+  this project, I may end up having the bot return templates, where we
+  can the add in the relevant data, such as course information.
