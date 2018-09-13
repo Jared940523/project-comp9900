@@ -8,14 +8,10 @@ conversations:
   - Use this form to request to enrol in a full class.  https://unswinsight.microsoftcrmportals.com/fcr/
 - - Substitution
   - Use this form to request to substitute a course in your program. https://unswinsight.microsoftcrmportals.com/csa/
-- - course infomation
-  - Here is the infomation about @ :''
-- - tutor
-  - Here is the infomation about @ :''
-- - information
-  - Here is the infomation about @ :''
-- - teaching
-  - Here is the infomation about @ :''
+- - how many programs
+  - there are 221 programs.
+- - total number programs
+  - there are 221 programs.
 - - who are you?
   - I am a unfinished chatbot by ING.
 - - hello
@@ -26,3 +22,68 @@ conversations:
   - what a nice day.
 - - good evening
   - thank you but it is not evening yet.
+##student_support
+- - service support type all
+  - Here are the service you can get :ss:{SELECT service FROM student_support;}
+- - moole login
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Moodle login';}
+- - ms office
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'MS office';}
+- - room booking
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Room booking';}
+- - key dates
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Key dates';}
+- - academic calendar
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Academic calendar';}
+- - airport pickup
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Airport pickup';}
+- - international student advisor
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'International Student Advisor';}
+- - international student briefing day
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'International Student Briefing Day';}
+- - unsw essentials for international students
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'UNSW Essentials for International Students';}
+- - unsw uni-verse app
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'UNSW Uni-Verse app';}
+- - support for families of students
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Support for families of students';}
+- - orientation week
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Orientation week';}
+- - unsw3+ calendar
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Information about the UNSW3+ Calendar';}
+- - register for workshops
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Register for workshops';}
+- - careers and employment
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Careers and employment';}
+- - english language and conversation skills
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'English Language and Conversation Skills';}
+- - student visa conditions
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Student visa conditions';}
+- - modes of study
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Modes of study';}
+- - reducing your study load
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Reducing your study load';}
+- - amendments and variations to your enrolment
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Amendments and variations to your enrolment';}
+- - credit transfers and advance standing
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Credit transfers and advance standing';}
+- - applying for a new confirmation of enrolment
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Applying for a new Confirmation of Enrolment';}
+- - program transfer
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Program transfer';}
+- - visa information and living in australia
+  - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Visa Information and Living in Australia';}
+
+##(if program_id or course_id):
+- - infomation about course
+  - infomation about{course_id/program id}:cp:{sql}
+- - infomation about program
+  - infomation about{course_id/program id}:cp:{sql}
+- - ask about course
+  - infomation about{course_id/program id}:cp:{sql}
+- - ask about program
+  - infomation about{course_id/program id}:cp:{sql}
+- - outline
+  - infomation about{course_id/program id}:cp:{sql}
+- - introduction
+  - infomation about{course_id/program id}:cp:{sql}
