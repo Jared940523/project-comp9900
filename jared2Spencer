@@ -1,0 +1,67 @@
+new feature:
+1.  need a sub program to extract program code.
+	the way of extract course id is import re to compile [^[a-z]*4[0-9]*4$]  >>> course_id 
+	then if compile[^[0-9]*4$] >>> program id
+	we can decide which format we use according whether we got the id or not.
+
+2.  different operration for different tables.
+there are 6 tables in the db, which are  
+| course_desp     |
+| course_info     |
+| degree_info     |
+| faculty         |
+| school          |
+| student_support |
+
+(1) student_support
+if not program id && not course id:
+ the response will like this :
+|  Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Moodle login';} |
+you can split the string by : and get ss (student_support)
+the sql query inside the {} will return the information user need.
+
+(2). faculty and school :
+ no need , pass
+
+(3) course_desp & course_info & degree_info:
+(course id && !program id)
+1.if the response is nothing(not matched) , return all the informathion the course had.
+
+if (response == 'I am sorry, but that does not look like anything to me.'):
+	if course id && !program id:
+		re,cursor = query('SELECT * FROM course_desp,course_info WHERE course_code = course_id;',cursor)
+		return re
+	if program id && !course id:
+		re,cursor = query('SELECT * FROM cdegree_info WHERE program = program_id;',cursor)
+		return re
+elif(response == 'infomation about{course_id/program id}:cp:{sql}'):
+	change {course_id/program id} to the actual id
+	if course id && !program id:
+		sql = 'SELECT * FROM course_desp,course_info WHERE course_code = course_id;'
+		re,cursor = query(sql,cursor)
+	if !course id && program id:
+		sql = ''SELECT * FROM cdegree_info WHERE program = program_id;'
+		re,cursor = query(sql,cursor)
+	if !course id && !program id:
+		return 'I am sorry, but that does not look like anything to me.'
+
+3. I upload new corpus you can get it from github and train the cb to see the performance.
+  you need to build a sql on ur labtop, in case you dont have it. here is the steps.
+  (1) down load mysql from https://dev.mysql.com/downloads/mysql/
+  (2) set the Environmental variable
+  (3) edit my-default.ini
+
+like this 
+	basedir=D:\Program Files\JavaTool\MySQL\mysql-5.6.39-winx64
+
+	datadir=D:\Program Files\JavaTool\MySQL\mysql-5.6.39-winx64\data
+
+
+  (4) install mysql using instruction
+  (5) start sql server.
+  (6) import sql file(on github dir chatbot database)
+  (7) run py file import csv file in .
+    (2 py files in chatbot_spider & map_spider)
+
+4. I prepare the code for sqlquery for you also on github.
+5. I will stay up late for tomorrow , if you got any questions just let me know and lets figure it out.
