@@ -47,3 +47,12 @@ Week 7:
   appropriately. As we will mostly likely be heavily using filters for
   this project, I may end up having the bot return templates, where we
   can the add in the relevant data, such as course information.
+
+Week 8:
+  It turns out that writing a lot of individual statements is not working
+  out, as there are way too many specific responses that I'd need to
+  cover. So I'll either have to keep working through it, or use a
+  different language parser, one more geared towards sentiment analysis,
+  which can check what kind of question they are asking, and then find
+  key words which I can use to query the database and then build a
+  response.
