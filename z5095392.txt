@@ -20,3 +20,8 @@ In this week, I am still working with the database module. In the weeks before, 
 
 week8
 crawl the information from UNSW map website and transform the csv data file to mySQL database system.
+
+week9
+1. build new environment to run the whole porject including the front-end part and the database system.
+2. add "enrollment requirement" element to the database
+3. crawl all the courses and course details from undergraduate handbook and add them to the database
