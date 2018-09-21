@@ -42,3 +42,6 @@ Week 8
 2. Create a Mysql databse to save program degree information and student support informtion.
 3. Draw databse schema summary.
 
+Week 9
+working on the further information that we need to import to our database.
+
