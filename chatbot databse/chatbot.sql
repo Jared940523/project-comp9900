@@ -20,14 +20,13 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `degree_info`;
 CREATE TABLE `degree_info` (
-  `Program_Title
-Program Title
-Program Title` varchar(2555) DEFAULT NULL,
-  `Award_Level` varchar(2555) DEFAULT NULL,
-  `Code` varchar(2555) DEFAULT NULL,
-  `Faculty` varchar(2555) DEFAULT NULL,
-  `url` varchar(2555) DEFAULT NULL
+  `Program_Title` TEXT DEFAULT NULL,
+  `Award_Level` TEXT DEFAULT NULL,
+  `Code` TEXT DEFAULT NULL,
+  `Faculty` TEXT DEFAULT NULL,
+  `url` TEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- Records of degree_info
