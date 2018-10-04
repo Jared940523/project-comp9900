@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import { map } from 'lodash';
+import { map, forEach } from 'lodash';
 import axios from 'axios';
 import './App.css';
 
@@ -35,19 +34,30 @@ class App extends Component {
   submit() {
     this.addMessage(true, this.state.input);
 
-    // axios.get('http://localhost:5000').then((response) => {
-    //   console.log(response);
-    // })
-
     axios.post('http://localhost:5000', {
       message: this.state.input
-    }).then((response) => this.addMessage(false, response.data));
+      // message: 'information',
+    // }).then((response) => this.addMessage(false, response.data));
+    }).then((response) => this.updateData(response.data));
 
     this.setState({ input: '' });
   }
 
+  updateData(data) {
+    if (data === '') {
+      return this.addMessage(false, 'Sorry, I couldn\'t find anything');
+    }
+    const courses = map(data.split('|'), (course) => {
+      return course.split(',');
+    });
+
+    forEach(courses, (course) => {
+      this.addMessage(false, <a href={course[2]} target="_blank">{course[0]}: {course[1]}</a>);
+    });
+  }
+
   onKeyPress(e) {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && this.state.input !== '') {
       this.submit();
     }
   }

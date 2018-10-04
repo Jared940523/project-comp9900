@@ -1,27 +1,77 @@
 import json
 import re
 from flask import Flask, request
-from csv111 import findinfo
+# from csv111 import findinfo
 from utils import save_obj, load_obj, search_zid
 from preprocess import preprocess, getcourse
 from flask_cors import CORS
-from cb import chatterbot
+# from language import process_words
+# from cb import chatterbot
+
+import sqlite3
+import nltk
+from nltk.corpus import state_union
+from nltk.tokenize import PunktSentenceTokenizer, sent_tokenize, word_tokenize
+from nltk.corpus import stopwords
 app = Flask(__name__)
 CORS(app)
 
-# initial_connection = True
-# current_user = None
-# current_user_courses = []
+stop_words = set(stopwords.words('english'))
 
-# users = load_obj('users')
+def filter_words(words):
+  result = []
+  for word in words:
+    print(word)
+    result.append(word[0])
+    # if word[1] == 'NN' or word[1] == 'NNP' or word[1] == 'NNS' or word[1] == 'NNPS':
+
+  return result
+
+def process_words(document):
+  conn = sqlite3.connect('test.db')
+  curs = conn.cursor()
+
+  sentences = nltk.sent_tokenize(document)
+  results = []
+  data = []
+  for sent in sentences:
+    data = data + nltk.pos_tag(nltk.word_tokenize(sent))
+
+  query = filter_words(data)
+  if query == []:
+    return []
+  result = curs.execute('select * from course_info WHERE course_title COLLATE UTF8_GENERAL_CI LIKE "%{}%"'.format('%'.join(query)))
+  # results += map(lambda r: r[0].strip(), result)
+  results += map(lambda r: list(r), set(result))
+  # results += result
+
+  # search course code
+  for word in query:
+    result = curs.execute('select * from course_info WHERE course_code = "{}"'.format(word.upper()))
+    # results += map(lambda r: r[0].strip(), result)
+    results += map(lambda r: list(r), set(result))
+    # results += result
+
+  # return list(set(results))[:10]
+  return results[:10]
+
 
 @app.route('/', methods = ['GET', 'POST'])
 def hello_world():
   if request.method == 'POST':
     message = request.get_json()['message']
-    print('Received: {}'.format(message))
 
-    data = preprocess(message)
+    # data = preprocess(message)
+    data = process_words(message)
+    # print(data)
+    # print(','.join(data))
+    retval = []
+    for course in data:
+      # print(course)
+      # print(','.join(course))
+      retval.append(','.join(course))
+    print(retval)
+    return '|'.join(retval)
 
     print(data)
 
