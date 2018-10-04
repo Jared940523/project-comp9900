@@ -56,3 +56,28 @@ Week 8:
   which can check what kind of question they are asking, and then find
   key words which I can use to query the database and then build a
   response.
+
+Week 9:
+  I've figured out that the best way to do the question answering
+  functionality is to use a more barebones toolkit. Fittingly,
+  I've found the NLTK: the Natural Language Toolkit. While this is
+  much less fancy than the Chatterbot library we were using previously,
+  it does give us a lot more flexibility in terms of how we can
+  interpret what the user is saying. I'm going to need to
+  do a lot of reading to figure out how to build this chatbot
+  from the ground up however
+
+Week 10:
+  I completely overhauled the way that the server interprets the
+  messages sent by the client. Using the Python NLTK, I have made
+  the server extract key words from the statement that the user
+  inputs, and then compares it against the database that my
+  other group members have made. Currently it only compares the
+  course title and the course code, and returns data in the form
+  of a 2d array, however, formatted as a string. To interpret
+  the data, I split the first layer array by a pipe "|", and the
+  second layer array by a comma ",". In future weeks I will
+  extend this functionality to include other tables, and I
+  will also make the natural language processing more
+  sophisticated, to allow for actual question asking and
+  answering, rather than the search engine it is now.
