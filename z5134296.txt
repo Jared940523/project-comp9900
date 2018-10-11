@@ -51,4 +51,7 @@ Week 11
 3. import the detailed information for both undergraduate and post graduate program.
    just like program duration and uoc and program description and program structure.
 
-
+Week 12
+I almost finish my database part right now, for this week I did modify the formmat of my databse part and communicate with other 
+team memembers about their part and trying to help with their part.
+And also, I was starting to write our final report and trying to get the outline of our final report that before the weekend.
