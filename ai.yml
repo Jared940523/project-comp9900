@@ -76,14 +76,20 @@ conversations:
 
 ##(if program_id or course_id):
 - - infomation about course
-  - infomation about{course_id/program id}:cp:{sql}
-- - infomation about program
-  - infomation about{course_id/program id}:cp:{sql}
-- - ask about course
-  - infomation about{course_id/program id}:cp:{sql}
-- - ask about program
-  - infomation about{course_id/program id}:cp:{sql}
+  - pg_course_info ug_course_info outline course_code prerequisite course_title credit faculty campus further_info
 - - outline
-  - infomation about{course_id/program id}:cp:{sql}
+  - pg_course_info ug_course_info outline course_code
 - - introduction
-  - infomation about{course_id/program id}:cp:{sql}
+  - pg_course_info ug_course_info outline course_code
+- - what is the description of
+  - pg_course_desp ug_course_desp description course_code
+- - what is the credit of
+  - pg_course_info ug_course_info credit course_code
+- - what is the enrollment requirement of
+  - pg_course_info ug_course_info prerequisite course_code
+- - what is the time table of 
+  - pg_course_info ug_course_info further_info course_code
+- - what is the outline of 
+  - pg_course_info ug_course_info outline course_code
+- - where is the position of
+  - building_info name id
