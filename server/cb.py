@@ -11,7 +11,7 @@ chatterbot = ChatBot(
     preprocessors=[
         'chatterbot.preprocessors.clean_whitespace'
     ],
-    storage_adapter="chatterbot.storage.SQLStorageAdapter",
+##    storage_adapter="chatterbot.storage.SQLStorageAdapter",
     logic_adapters=[
         {
             "import_path": "chatterbot.logic.BestMatch",
@@ -21,16 +21,17 @@ chatterbot = ChatBot(
          {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
             'threshold': 0.45,
-            'default_response': 'I am sorry, but that does not look like anything to me.'
+            'default_response': 'I am sorry, this maybe beyond my perceiving.'
         }
     ],
     input_adapter="chatterbot.input.VariableInputTypeAdapter",
     output_adapter="chatterbot.output.OutputAdapter",
     output_format="text",
-    database="database.db"
+##    database="database.db"
 )
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
 chatterbot.train(
-    "../ai.yml"
+    "../ai.yml",
+    "./conversations.yml"
 )
