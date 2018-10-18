@@ -10,9 +10,36 @@ import requests
 import webbrowser
 import pymysql
 import difflib
+import re
+import urllib.parse, urllib.request
+import hashlib
+import urllib
+import random
+import json
+import time
+
 from collections import defaultdict
 app = Flask(__name__)
 CORS(app)
+
+url_google = 'http://translate.google.cn'
+reg_text = re.compile(r'(?<=TRANSLATED_TEXT=).*?;')
+user_agent = r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) ' \
+                  r'Chrome/44.0.2403.157 Safari/537.36'
+
+def translateGoogle(text, f='zh-cn', t='en'):
+    values = {'hl': 'en', 'ie': 'utf-8', 'text': text, 'langpair': '%s|%s' % (f, t)}
+    value = urllib.parse.urlencode(values)
+    req = urllib.request.Request(url_google + '?' + value)
+    req.add_header('User-Agent', user_agent)
+    response = urllib.request.urlopen(req)
+    content = response.read().decode('utf-8')
+    data = reg_text.search(content)
+    if not data:
+        return text
+    result = data.group(0).strip(';').strip('\'')
+    return result
+
 def get_tuple_info_from_db():
     conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='chatbot')
     cur = conn.cursor()
@@ -65,6 +92,12 @@ def chatbot():
         building_ids[index], building_names[index] = item[0], item[1]
     if request.method == 'POST':
         message = request.get_json()['message']
+        language = request.get_json()['language']
+
+        if language != 'en-US':
+            print(language)
+            message = translateGoogle(message, f=language, t='en')
+
         print('Received: {}'.format(message))
         data = preprocess(message)
         course_code = []
@@ -129,10 +162,10 @@ def chatbot():
 
             if course_code:
                 results = response_from_db(query)
-                string = 'course_info\n'
-                string += '\t'.join(tuple_name) + '\n'
+                string = 'course_info;'
+                string += '|'.join(tuple_name) + ';'
                 for res in results:
-                    string += '\t'.join(res) + '\n'
+                    string += '|'.join(res) + ';'
                 response = string
             elif program_code:
                 querys = []
@@ -149,35 +182,58 @@ def chatbot():
                     querys.append(query)
                 query = ' union '.join(querys) + ';'
                 results = response_from_db(query)
-                string = "program_info\n"
+                string = "program_info;"
                 for res in results:
-                    string += '\t'.join(res) + '\n'
+                    string += '|'.join(res) + ';'
                 response = string
             elif ser_flag:
                 query = """SELECT Description,URL FROM student_support WHERE service = \'"""+service_name[0]+"\'"+";"
                 results = response_from_db(query)
-                string = "service_info\n"
+                string = "service_info;"
                 for res in results:
-                    string += '\t'.join(res) + '\n'
+                    string += '|'.join(res) + ';'
                 response = string
             elif 'building_info' in query:
                 if building_name:
-                    print('building_name:', building_name)
                     names = ['name=\'' + name + '\'' for name in building_name]
                     string = ' or '.join(names)
                     query = query[:-1] + ' where ' + string + ';'
                     results = response_from_db(query)
-                    string = 'building_info\n'
+                    string = 'building_info;'
                     for res in results:
-                        string += '\t'.join(res) + '\n'
-                    response = string
+                        string += '|'.join(res) + ';'
+                    response = string + "The information for all campus buildings can be found at http://fmtoolbox.unsw.edu.au/comms/KensingtonCampus.pdf"
+                    print(response)
 
         if str(response) == 'I am sorry, this maybe beyond my perceiving.':
             response = str(response) + ' Maybe you could find something useful in here.'
             res_from_search(message)
 
-        print('Sending: {}'.format(response))
-        # response = 'I received ' + message
+        rows = []
+        cols = []
+        meta = True
+        translated = []
+
+        if language != 'en-US':
+            for row in response.split(';'):
+                # skip over the meta handler when translating
+                if meta:
+                    meta = False
+                    translated.append(''.join(row))
+                    continue
+
+                cols = []
+                for col in row.split('|'):
+                    cols.append(translateGoogle(col, f='en', t=language))
+                rows.append(cols)
+
+            for row in rows:
+                translated.append('|'.join(row))
+
+            response = ';'.join(translated)
+        # if language != 'EN':
+        #     response = translateGoogle(response, f='en', t=language)
+        print(response)
         return str(response)
 
 if __name__ == '__main__':

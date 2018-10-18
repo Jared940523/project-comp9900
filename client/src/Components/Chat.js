@@ -8,6 +8,13 @@ import Languages from './Languages'
 import annyang from 'annyang';
 import '../App.css';
 
+const defaultLang = {
+  value: Languages[0].code,
+  label: Languages[0].value,
+}
+
+let init = false;
+
 class Chat extends Component {
   constructor() {
     super();
@@ -17,6 +24,7 @@ class Chat extends Component {
       messages: [['bot', 'Hello! How can I assist you?']],
       loading: false,
       micActive: false,
+      language: defaultLang,
     }
   }
 
@@ -26,9 +34,9 @@ class Chat extends Component {
     if (annyang) {
       annyang.addCallback('result', (userSaid, commandText, phrases) => {
         this.stopListening();
-        this.setState({ input: userSaid[0] }, this.submit);
+        this.setState({ input: userSaid[0] }, () => this.submit(true));
       });
-      annyang.setLanguage('he');
+      annyang.setLanguage('zh-CN');
       annyang.start();
     }
   }
@@ -64,8 +72,10 @@ class Chat extends Component {
     this.addMessage(true, this.state.input);
 
     axios.post('http://localhost:5000', {
-      message: this.state.input
+      message: this.state.input,
+      language: this.state.language.value,
     }).then((response) => {
+      console.log(response.data);
       this.updateData(response.data)
     }).catch((err) => {
       console.error(err);
@@ -111,15 +121,26 @@ class Chat extends Component {
           }
         </div>
         <div className="message-input-container">
-          <div className="message-input">
+          <div className="message-input lang">
             <Select
+              className="lang-select"
+              classNamePrefix="lang-select"
               options={Languages.map((lang) => {
                 return {
                   label: lang.value,
                   value: lang.code,
                 }
               })}
+              value={this.state.language}
+              onChange={(e) => this.setState({ language: e })}
             />
+            {
+              this.state.micActive
+                ? <i className="fas fa-microphone red" onClick={this.stopListening.bind(this)}></i>
+                : <i className="fas fa-microphone" onClick={this.startListening.bind(this)}></i>
+            }
+          </div>
+          <div className="message-input">
             <FormControl
               type="text"
               value={this.state.input}
@@ -127,11 +148,6 @@ class Chat extends Component {
               onChange={(e) => this.onChange(e)}
               onKeyPress={(e) => this.onKeyPress(e)}
             />
-            {
-              this.state.micActive
-                ? <i className="fas fa-microphone red" onClick={this.stopListening.bind(this)}></i>
-                : <i className="fas fa-microphone" onClick={this.startListening.bind(this)}></i>
-            }
             <span className="send-icon">
               <i
                 className="fas fa-arrow-alt-circle-right"

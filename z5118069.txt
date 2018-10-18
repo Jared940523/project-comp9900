@@ -81,3 +81,15 @@ Week 10:
   will also make the natural language processing more
   sophisticated, to allow for actual question asking and
   answering, rather than the search engine it is now.
+
+Week 11:
+  I did more research into the front end functionalities, while the
+  rest of my group worked on the back end. The first thing I wanted
+  to work on was the voice recognition, which proved to be a
+  challenge. There are many voice recognition libraries available,
+  but most of them are paid, so I couldn't use them. Google has
+  their own Speech-to-Text library, but it doesn't work with
+  ReactJS on the client side, only NodeJS on the server side.
+  Luckily, I managed to find annyang, a tiny JavaScript library
+  that allows for client side voice recognition, and it worked really
+  well, and I was able to integrate it into the front end.

@@ -29,12 +29,13 @@ function urlify(text) {
 }
 
 function processContent(content) {
-  const meta = content.split('\n')[0];
+  console.log(content);
+  const meta = content.split(';')[0];
 
   if (meta === MESSAGE_TYPES.course) {
-    let [ _, headers, info ] = content.split('\n');
-    headers = headers.split('\t');
-    info = info.split('\t');
+    let [ _, headers, info ] = content.split(';');
+    headers = headers.split('|');
+    info = info.split('|');
     return map(headers, (_, index) => {
       return (
         <div key={index}>
@@ -44,24 +45,21 @@ function processContent(content) {
       );
     });
   } else if (meta === MESSAGE_TYPES.building) {
-    let [ _, location ] = content.split('\n');
+    let [ _, location, help ] = content.split(';');
     return (
       <div>
         <p className="no-margin"><strong>Location:</strong></p>
         <p>{location}</p>
-        <p>
-          The information for all campus buildings can be
-          found <a href="http://fmtoolbox.unsw.edu.au/comms/KensingtonCampus.pdf">here</a>
-        </p>
+        <p>{help}</p>
       </div>
     );
 
   } else if (meta === MESSAGE_TYPES.service) {
-    let [ _, info ] = content.split('\n');
+    let [ _, info ] = content.split(';');
     return <p>{info}</p>;
   } else if (meta === MESSAGE_TYPES.program) {
-    let [ _, info ] = content.split('\n');
-    const fields = info.split('\t');
+    let [ _, info ] = content.split(';');
+    const fields = info.split('|');
 
     return map(fields, (field, index) => <p key={index}>{urlify(field)}</p>);
   }

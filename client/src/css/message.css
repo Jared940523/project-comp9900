@@ -1,15 +1,13 @@
 #messages {
-  margin-top: 10px;
-  max-height: 80vh;
+  padding-top: 10px;
+  max-height: calc(100vh - 200px);
   overflow-y: auto;
+  width: 100vw;
+  max-width: 600px;
 }
 
 .message-container {
   display: flex;
-  /*background-color: black;*/
-  width: 100vw;
-  max-width: 600px;
-  /*height: 50px;*/
   align-items: center;
   word-wrap: break-word;
 }
@@ -18,7 +16,6 @@
   padding: 10px 20px;
   border-radius: 1.3em;
   max-width: 60%;
-  /*max-width: 400px;*/
   margin-top: 10px;
   margin-bottom: 10px;
 }
