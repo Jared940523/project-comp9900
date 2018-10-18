@@ -5522,6 +5522,10 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-composition-input@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-composition-input/-/react-composition-input-1.0.5.tgz#dd4ead177f2853d7cf5d11997f759b4265177aac"
+
 react-dev-utils@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-5.0.1.tgz#1f396e161fe44b595db1b186a40067289bf06613"

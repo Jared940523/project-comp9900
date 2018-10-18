@@ -21,7 +21,7 @@ chatterbot = ChatBot(
          {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
             'threshold': 0.45,
-            'default_response': 'I am sorry, but that does not look like anything to me.'
+            'default_response': 'I am sorry, this maybe beyond my perceiving.'
         }
     ],
     input_adapter="chatterbot.input.VariableInputTypeAdapter",
@@ -32,5 +32,6 @@ chatterbot = ChatBot(
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
 chatterbot.train(
-    "../ai.yml"
+    "../ai.yml",
+    "./conversations.yml"
 )

@@ -10,7 +10,7 @@ class App extends Component {
 
     this.state = {
       input: '',
-      messages: [['Centerbot', 'Hello! How can I assist you?']],
+      messages: [['Centerbot', 'Hello! How can I assist you?']]
     }
   }
 
@@ -18,6 +18,7 @@ class App extends Component {
     const { messages } = this.state;
     const source = fromUser ? 'You' : 'Centerbot';
     messages.push([source, message]);
+    
     this.setState({
       messages,
     }, this.updateScroll);
@@ -52,6 +53,7 @@ class App extends Component {
     }
   }
 
+  
   render() {
     return (
       <div className="App">
@@ -67,12 +69,49 @@ class App extends Component {
         </div>
         <input
           type="text"
+          list="pasta"
           className="query-input"
           placeholder="Enter your query..."
           value={this.state.input}
           onChange={(e) => this.onChange(e)}
           onKeyPress={(e) => this.onKeyPress(e)}
         />
+	<datalist id="pasta">
+	<option>UNSW</option>
+	<option>New South Wales</option>
+	<option>Library</option>
+
+	<option>AGSM</option>
+	<option>Ainsworth Building</option>
+	<option>Biological Sciences North</option>
+	<option>Biological Sciences South</option>
+	<option>Blockhouse</option>
+	<option>Building D10</option>
+	<option>Building L5, 223 Anzac Parade</option>
+	<option>Chancellery</option>
+	<option>Chemical Sciences</option>
+	<option>Civil Engineering</option>
+	<option>Computer Science</option>
+	<option>Dalton</option>
+	<option>Dangerous Goods Store</option>
+	<option>Electrical Engineering</option>
+	<option>Golf House, 38 Botany Street</option>
+	<option>Research Services</option>
+	<option>Security</option>
+	<option>Sports Association </option>
+	<option>Study Abroad and Exchange</option>
+	<option>Squash Courts</option>
+	<option>Swimming Pool</option>
+	<option>The Learning Centre</option>
+	<option>Unisuper</option>
+	<option>University Health Services</option>
+	<option>UNSW Admissions</option>
+	<option>UNSW Bookshop</option>
+	<option>UNSW International Student Centre</option>
+	<option>UNSW Fitness and Aquatic Centre</option>
+	<option>UNSW Student Centre</option>
+
+	</datalist>
       </div>
     );
   }
