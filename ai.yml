@@ -12,20 +12,10 @@ conversations:
   - there are 221 programs.
 - - total number programs
   - there are 221 programs.
-- - who are you?
-  - I am a unfinished chatbot by ING.
-- - hello
-  - hi.
-- - how are you
-  - I am fine.
-- - good morning
-  - what a nice day.
-- - good evening
-  - thank you but it is not evening yet.
 ##student_support
 - - service support type all
   - Here are the service you can get :ss:{SELECT service FROM student_support;}
-- - moole login
+- - moodle login
   - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'Moodle login';}
 - - ms office
   - Here is the infomation about Moodle login :ss:{SELECT discription,url FROM student_support WHERE service = 'MS office';}
@@ -87,9 +77,11 @@ conversations:
   - pg_course_info ug_course_info credit course_code
 - - what is the enrollment requirement of
   - pg_course_info ug_course_info prerequisite course_code
-- - what is the time table of 
+- - what is the time table of
   - pg_course_info ug_course_info further_info course_code
-- - what is the outline of 
+- - what is the outline of
   - pg_course_info ug_course_info outline course_code
 - - where is the position of
+  - building_info name id
+- - where is the
   - building_info name id

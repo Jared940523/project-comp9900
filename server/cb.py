@@ -27,11 +27,12 @@ chatterbot = ChatBot(
     input_adapter="chatterbot.input.VariableInputTypeAdapter",
     output_adapter="chatterbot.output.OutputAdapter",
     output_format="text",
-##    database="database.db"
+    database="database.db",
+    read_only=True,
 )
-chatterbot.set_trainer(ChatterBotCorpusTrainer)
+# chatterbot.set_trainer(ChatterBotCorpusTrainer)
 
-chatterbot.train(
-    "../ai.yml",
-    "./conversations.yml"
-)
+# chatterbot.train(
+#     "../ai.yml",
+#     "chatterbot.corpus.english.conversations",
+# )

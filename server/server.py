@@ -14,15 +14,7 @@ from collections import defaultdict
 app = Flask(__name__)
 CORS(app)
 def get_tuple_info_from_db():
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='351227', db='user')
-    cur = conn.cursor()
-    tables = defaultdict()
-    sql = 'show tables;'
-    cur.execute(sql)
-    results = cur.fetchall()
-
-def get_tuple_info_from_db():
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='351227', db='user')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='chatbot')
     cur = conn.cursor()
     tables = defaultdict()
     sql = 'show tables;'
@@ -40,7 +32,7 @@ def get_tuple_info_from_db():
 
 
 def response_from_db(query):
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='351227', db='user')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='chatbot')
     cur = conn.cursor()
     cur.execute(query)
     results = cur.fetchall()
@@ -56,7 +48,7 @@ def res_from_search(keyword):
 
 
 @app.route('/', methods = ['GET', 'POST'])
-def hello_world():
+def chatbot():
     serv_list = ["Moodle login","MS office","Room booking","Key dates","Academic calendar","Airport pickup","International Student Advisor",
                     "International Student Briefing Day","UNSW Essentials for International Students","UNSW Uni-Verse app","Support for families of students",
                     "Orientation week","Information about the UNSW3+ Calendar","Register for workshops","Careers and employment","English Language and Conversation Skills",
@@ -71,13 +63,10 @@ def hello_world():
     building_ids = [' ' for _ in range(len(results))]
     for index, item in enumerate(results):
         building_ids[index], building_names[index] = item[0], item[1]
-#    print('names:', building_names, 'ids:', building_ids)
-#    print(tables.values())
     if request.method == 'POST':
         message = request.get_json()['message']
         print('Received: {}'.format(message))
         data = preprocess(message)
-#        print('data:', data)
         course_code = []
         program_code = []
         building_name = []
@@ -140,7 +129,8 @@ def hello_world():
 
             if course_code:
                 results = response_from_db(query)
-                string = '\t'.join(tuple_name) + '\n'
+                string = 'course_info\n'
+                string += '\t'.join(tuple_name) + '\n'
                 for res in results:
                     string += '\t'.join(res) + '\n'
                 response = string
@@ -159,14 +149,14 @@ def hello_world():
                     querys.append(query)
                 query = ' union '.join(querys) + ';'
                 results = response_from_db(query)
-                string = ""
+                string = "program_info\n"
                 for res in results:
                     string += '\t'.join(res) + '\n'
                 response = string
             elif ser_flag:
                 query = """SELECT Description,URL FROM student_support WHERE service = \'"""+service_name[0]+"\'"+";"
                 results = response_from_db(query)
-                string = ""
+                string = "service_info\n"
                 for res in results:
                     string += '\t'.join(res) + '\n'
                 response = string
@@ -177,10 +167,10 @@ def hello_world():
                     string = ' or '.join(names)
                     query = query[:-1] + ' where ' + string + ';'
                     results = response_from_db(query)
-                    string = ''
+                    string = 'building_info\n'
                     for res in results:
                         string += '\t'.join(res) + '\n'
-                    response = string + 'and the building information is in http://fmtoolbox.unsw.edu.au/comms/KensingtonCampus.pdf'
+                    response = string
 
         if str(response) == 'I am sorry, this maybe beyond my perceiving.':
             response = str(response) + ' Maybe you could find something useful in here.'

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { map, forEach } from 'lodash';
 import axios from 'axios';
-import { Grid, Row, Col, FormControl } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap';
+import Select from 'react-select';
+import Message from './Message';
+import Languages from './Languages'
+import annyang from 'annyang';
 import '../App.css';
 
 class Chat extends Component {
@@ -10,13 +14,36 @@ class Chat extends Component {
 
     this.state = {
       input: '',
-      messages: [['Centerbot', 'Hello! How can I assist you?']],
+      messages: [['bot', 'Hello! How can I assist you?']],
+      loading: false,
+      micActive: false,
+    }
+  }
+
+  startListening() {
+    console.log('startListening()');
+    this.setState({ micActive: true });
+    if (annyang) {
+      annyang.addCallback('result', (userSaid, commandText, phrases) => {
+        this.stopListening();
+        this.setState({ input: userSaid[0] }, this.submit);
+      });
+      annyang.setLanguage('he');
+      annyang.start();
+    }
+  }
+
+  stopListening() {
+    console.log('stopListening()');
+    this.setState({ micActive: false });
+    if (annyang) {
+      annyang.abort();
     }
   }
 
   addMessage(fromUser, message) {
     const { messages } = this.state;
-    const source = fromUser ? 'You' : 'Centerbot';
+    const source = fromUser ? 'you' : 'bot';
     messages.push([source, message]);
     this.setState({
       messages,
@@ -33,32 +60,27 @@ class Chat extends Component {
   }
 
   submit() {
+    if (this.state.input === '') return;
     this.addMessage(true, this.state.input);
 
     axios.post('http://localhost:5000', {
       message: this.state.input
-      // message: 'information',
-    // }).then((response) => this.addMessage(false, response.data));
-    }).then((response) => this.updateData(response.data));
+    }).then((response) => {
+      this.updateData(response.data)
+    }).catch((err) => {
+      console.error(err);
+      this.addMessage(false, 'Sorry, something went wrong. Please try asking something else.');
+    })
 
     this.setState({ input: '' });
   }
 
   updateData(data) {
-    const test = data.strip().split('\n');
-    forEach(test, (a) => {
-      console.log(a.split("\t"));
-    })
     if (data === '') {
       return this.addMessage(false, 'Sorry, I couldn\'t find anything');
     }
-    const courses = map(data.split('|'), (course) => {
-      return course.split(',');
-    });
 
-    forEach(courses, (course) => {
-      this.addMessage(false, <a href={course[2]} target="_blank">{course[0]}: {course[1]}</a>);
-    });
+    this.addMessage(false, data);
   }
 
   onKeyPress(e) {
@@ -70,26 +92,53 @@ class Chat extends Component {
   render() {
     return (
       <div>
-        <Grid>
-          <Row className="message-container" id="messages">
+        <div id="messages">
+          {
+            map(this.state.messages, (message, key) => {
+              return (
+                <Message
+                  key={key}
+                  data={message}
+                />
+              )
+              return (
+                <div key={key}>
+                  <p><strong>{message[0]}</strong></p>
+                  {message[1]}
+                </div>
+              );
+            })
+          }
+        </div>
+        <div className="message-input-container">
+          <div className="message-input">
+            <Select
+              options={Languages.map((lang) => {
+                return {
+                  label: lang.value,
+                  value: lang.code,
+                }
+              })}
+            />
+            <FormControl
+              type="text"
+              value={this.state.input}
+              placeholder="Enter your question..."
+              onChange={(e) => this.onChange(e)}
+              onKeyPress={(e) => this.onKeyPress(e)}
+            />
             {
-              map(this.state.messages, (message, key) => {
-                return <p key={key}><strong>{message[0]}</strong>: {message[1]}</p>;
-              })
+              this.state.micActive
+                ? <i className="fas fa-microphone red" onClick={this.stopListening.bind(this)}></i>
+                : <i className="fas fa-microphone" onClick={this.startListening.bind(this)}></i>
             }
-          </Row>
-        </Grid>
-        <div className="message-input">
-          <FormControl
-            type="text"
-            value={this.state.input}
-            placeholder="Enter text"
-            onChange={(e) => this.onChange(e)}
-            onKeyPress={(e) => this.onKeyPress(e)}
-          />
-          <span className="send-icon">
-            <i className="fas fa-arrow-alt-circle-right"></i>
-          </span>
+            <span className="send-icon">
+              <i
+                className="fas fa-arrow-alt-circle-right"
+                onClick={this.submit.bind(this)}
+              />
+            </span>
+          </div>
         </div>
       </div>
     );

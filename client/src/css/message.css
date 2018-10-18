@@ -1,0 +1,39 @@
+#messages {
+  margin-top: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.message-container {
+  display: flex;
+  /*background-color: black;*/
+  width: 100vw;
+  max-width: 600px;
+  /*height: 50px;*/
+  align-items: center;
+  word-wrap: break-word;
+}
+
+.message {
+  padding: 10px 20px;
+  border-radius: 1.3em;
+  max-width: 60%;
+  /*max-width: 400px;*/
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.message.bot {
+  text-align: left;
+  background-color: #F1F0F0;
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+.message.you {
+  text-align: right;
+  background-color: #0084FF;
+  color: #FFFFFF;
+  margin-left: auto;
+  margin-right: 10px;
+}
