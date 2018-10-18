@@ -76,13 +76,11 @@ conversations:
 
 ##(if program_id or course_id):
 - - infomation about course
-  - Please provide more detailed information about the course eg. course code or course title
-- - infomation about program
-  - Please provide more detailed information about the program eg. program code or program title
+  - pg_course_info ug_course_info outline course_code prerequisite course_title credit faculty campus further_info
 - - outline
-  - infomation about{course_id/program id}:cp:{sql}
+  - pg_course_info ug_course_info outline course_code
 - - introduction
-  - infomation about{course_id/program id}:cp:{sql}
+  - pg_course_info ug_course_info outline course_code
 - - what is the description of
   - pg_course_desp ug_course_desp description course_code
 - - what is the credit of

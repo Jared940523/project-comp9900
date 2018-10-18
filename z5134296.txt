@@ -38,10 +38,20 @@ Week 7
 4. Learning mySQL database and start to import csv files that I crawled to mySQL database.
 
 Week 8
-1. Crawl information for the program degrees from unsw website and save it into csv file.
+1. Crawl information for the post program degrees from unsw website and save it into csv file.
 2. Create a Mysql databse to save program degree information and student support informtion.
 3. Draw databse schema summary.
 
 Week 9
 working on the further information that we need to import to our database.
 
+Week 11
+1. import the undergraduate program degrees information to Mysql database 
+2. import post research program information to Mysql database
+3. import the detailed information for both undergraduate and post graduate program.
+   just like program duration and uoc and program description and program structure.
+
+Week 12
+I almost finish my database part right now, for this week I did modify the formmat of my databse part and communicate with other 
+team memembers about their part and trying to help with their part.
+And also, I was starting to write our final report and trying to get the outline of our final report that before the weekend.

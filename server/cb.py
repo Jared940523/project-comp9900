@@ -11,7 +11,7 @@ chatterbot = ChatBot(
     preprocessors=[
         'chatterbot.preprocessors.clean_whitespace'
     ],
-    storage_adapter="chatterbot.storage.SQLStorageAdapter",
+##    storage_adapter="chatterbot.storage.SQLStorageAdapter",
     logic_adapters=[
         {
             "import_path": "chatterbot.logic.BestMatch",
@@ -27,7 +27,7 @@ chatterbot = ChatBot(
     input_adapter="chatterbot.input.VariableInputTypeAdapter",
     output_adapter="chatterbot.output.OutputAdapter",
     output_format="text",
-    database="database.db"
+##    database="database.db"
 )
 chatterbot.set_trainer(ChatterBotCorpusTrainer)
 

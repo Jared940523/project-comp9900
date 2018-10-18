@@ -10,7 +10,7 @@ for root, dirs, files in os.walk("."):
         if ".csv" in name:
             csv_file.append(os.path.join(root, name))
 
-conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='351227', db='user')
+conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='351227', db='chatbot')
 
 cur = conn.cursor()
 drop_table = '''DROP TABLE IF EXISTS map_info'''
