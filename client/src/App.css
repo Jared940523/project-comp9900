@@ -39,3 +39,16 @@
   margin-bottom: 15vh;
   width: 200px;
 }
+
+.message-input {
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+}
+
+.message-input .send-icon {
+  height: 50px;
+  width: 50px;
+}
