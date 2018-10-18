@@ -133,7 +133,8 @@ def hello_world():
 
             if course_code:
                 results = response_from_db(query)
-                string = '\t'.join(tuple_name) + '\n'
+                string = 'course_info\n'
+                string += '\t'.join(tuple_name) + '\n'
                 for res in results:
                     string += '\t'.join(res) + '\n'
                 response = string
@@ -152,14 +153,14 @@ def hello_world():
                     querys.append(query)
                 query = ' union '.join(querys) + ';'
                 results = response_from_db(query)
-                string = ""
+                string = "program_info\n"
                 for res in results:
                     string += '\t'.join(res) + '\n'
                 response = string
             elif ser_flag:
                 query = """SELECT Description,URL FROM student_support WHERE service = \'"""+service_name[0]+"\'"+";"
                 results = response_from_db(query)
-                string = ""
+                string = "service_info\n"
                 for res in results:
                     string += '\t'.join(res) + '\n'
                 response = string
@@ -170,7 +171,7 @@ def hello_world():
                     string = ' or '.join(names)
                     query = query[:-1] + ' where ' + string + ';'
                     results = response_from_db(query)
-                    string = ''
+                    string = 'building_info\n'
                     for res in results:
                         string += '\t'.join(res) + '\n'
                     response = string + 'and the building information is in http://fmtoolbox.unsw.edu.au/comms/KensingtonCampus.pdf'
