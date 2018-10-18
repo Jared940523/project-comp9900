@@ -21,6 +21,14 @@ def get_tuple_info_from_db():
     cur.execute(sql)
     results = cur.fetchall()
 
+def get_tuple_info_from_db():
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='351227', db='user')
+    cur = conn.cursor()
+    tables = defaultdict()
+    sql = 'show tables;'
+    cur.execute(sql)
+    results = cur.fetchall()
+
     for table in results:
         tables[table[0]] = []
         sql = 'desc ' + table[0] + ';'
@@ -101,14 +109,12 @@ def hello_world():
 ##                building_name += [item for item in building_names if word in item]
 ##        if building_name:
 ##            building_name = [item for item in building_name if difflib.SequenceMatcher(a=item, b=' '.join(data)).quick_ratio() > 0.9]
-
-
-
         response = chatterbot.get_response(message)
         words = str(response).split(' ')
         table_name = []
         tuple_name = []
         words_cp = [i for i in words]
+
         for word in words:
             if word in tables.keys() and word not in table_name:
                 table_name.append(word)
@@ -116,6 +122,7 @@ def hello_world():
                 for item in words_cp:
                     if item.replace('_', ' ') in tables[word] and item not in tuple_name:
                         tuple_name.append(item)
+
         if table_name or tuple_name or program_code or service_name:
             querys = []
             for table in table_name:
