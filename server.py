@@ -80,8 +80,8 @@ def hello_world():
             program_code_p = re.compile(r'[0-9]{4}')
             course_code += course_code_p.findall(word)
             program_code += program_code_p.findall(word)
-            for i in course_code:
-                i.replace(" ","")
+            for i in range (len(course_code)):
+                course_code[i] = course_code[i].replace(" ","")
             for i in serv_list:
                 if i.upper() in message.upper():
                     service_name.append(i)
