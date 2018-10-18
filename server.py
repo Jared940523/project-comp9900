@@ -76,7 +76,7 @@ def hello_world():
         building_id = []
         service_name = []
         for word in data:
-            course_code_p = re.compile(r'[a-zA-Z]{4}[ ]{+}[0-9]{4}')
+            course_code_p = re.compile(r'[a-zA-Z]{4}\s*[0-9]{4}')
             program_code_p = re.compile(r'[0-9]{4}')
             course_code += course_code_p.findall(word)
             program_code += program_code_p.findall(word)
