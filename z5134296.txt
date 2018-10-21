@@ -55,3 +55,8 @@ Week 12
 I almost finish my database part right now, for this week I did modify the formmat of my databse part and communicate with other 
 team memembers about their part and trying to help with their part.
 And also, I was starting to write our final report and trying to get the outline of our final report that before the weekend.
+
+Week 13
+This week, we have scheduled a meeting to finished the final version of our chatbot system and prepared for the final demo.
+And also, I have communicate with all other memembers and finished our final report.
+
