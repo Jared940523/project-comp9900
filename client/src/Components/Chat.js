@@ -36,7 +36,7 @@ class Chat extends Component {
         this.stopListening();
         this.setState({ input: userSaid[0] }, () => this.submit(true));
       });
-      annyang.setLanguage('zh-CN');
+      annyang.setLanguage(this.state.language.value);
       annyang.start();
     }
   }

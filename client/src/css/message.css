@@ -28,7 +28,7 @@
 }
 
 .message.you {
-  text-align: right;
+  text-align: left;
   background-color: #0084FF;
   color: #FFFFFF;
   margin-left: auto;

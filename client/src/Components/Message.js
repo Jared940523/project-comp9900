@@ -49,7 +49,11 @@ function processContent(content) {
     return (
       <div>
         <p className="no-margin"><strong>Location:</strong></p>
-        <p>{location}</p>
+        {
+          map(location.split('|'), (loc) => {
+            return <p>{loc}</p>
+          })
+        }
         <p>{help}</p>
       </div>
     );

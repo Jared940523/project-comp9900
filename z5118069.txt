@@ -93,3 +93,14 @@ Week 11:
   Luckily, I managed to find annyang, a tiny JavaScript library
   that allows for client side voice recognition, and it worked really
   well, and I was able to integrate it into the front end.
+
+Week 12:
+  I finished the UI design. I didn't want to do this earlier in case
+  of other features we wanted to add, but now that's it's nearing
+  the end of the project I know exactly what features need to be
+  implented in the UI. I took inspiration from other messaging apps,
+  as it is an interface that is very clean, and what people are used
+  to. I also made the design mobile-first, as more and more people
+  are using their mobile phones to browse the internet, and it is
+  better design wise to convert a design from mobile to desktop,
+  that it is the other way around.
