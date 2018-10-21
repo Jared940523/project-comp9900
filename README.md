@@ -8,7 +8,7 @@ The user interface will now open automatically in your preferred browser
 
 ## Run the server
 1. Run `pip install -r requirements.txt` from the "server/" folder
-..* Optional: use a virtual environment
+    * Optional: use a virtual environment
 2. Run `python3 server.py`
 
 The server is now running
