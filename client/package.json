@@ -9,7 +9,7 @@
     "@google-cloud/speech": "^2.1.1",
     "@google-cloud/storage": "^2.1.0",
     "annyang": "^2.6.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "http2": "^3.3.7",
     "i": "^0.3.6",
     "linkifyjs": "^2.1.7",
